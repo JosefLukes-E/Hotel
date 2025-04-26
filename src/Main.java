@@ -24,9 +24,9 @@ public class Main {
         System.out.println(guest3);
         System.out.println(guest4);
 
-        Room room1 = new Room(1,1,true,true,new BigDecimal(1000));
-        Room room2 = new Room(2,2,true,true,new BigDecimal(5000));
-        Room room3 = new Room(3,3,false,true,new BigDecimal(2400));
+        Room room1 = new Room(1,1,true,true,BigDecimal.valueOf(1000));
+        Room room2 = new Room(2,2,true,true,BigDecimal.valueOf(5000));
+        Room room3 = new Room(3,3,false,true,BigDecimal.valueOf(2400));
 
 
 
