@@ -1,7 +1,10 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Booking {
     private List<Guest> guests= new ArrayList<>();
@@ -34,6 +37,19 @@ public class Booking {
 
     }
 
+    public BigDecimal totalDaysForStay(){
+
+        long countOfDays =  DAYS.between(startDate,endDate);
+
+        return BigDecimal.valueOf(countOfDays);
+
+    }
+    public BigDecimal totalPriceForStay(){
+
+
+        BigDecimal total = room.getPricePerNight().multiply(totalDaysForStay());
+        return total;
+    }
 
     public List<Guest> getGuests() {
         return guests;
@@ -84,7 +100,8 @@ public class Booking {
                 ",od " + startDate.format(Main.czDateFormatter) +
                 ",do " + endDate.format(Main.czDateFormatter) +
                 ",pokoj č. " + room.getNumber() +
-                ",typ pobytu " + typeOfVacation
-                ;
+                ",typ pobytu " + typeOfVacation +
+                ",počet dní " + totalDaysForStay()  +
+                ",cena za pobyt " + totalPriceForStay() + " Kč";
     }
 }
