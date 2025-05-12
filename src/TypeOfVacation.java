@@ -7,7 +7,7 @@ public enum TypeOfVacation {
         if (this==TypeOfVacation.BUSINESS) {
             return "Obchodní";
         } else if (this==TypeOfVacation.PRIVATE){
-            return "Privátní";
+            return "Soukromý";
         } else if (this==TypeOfVacation.STUDY){
                 return "Studijní";
         } else {
