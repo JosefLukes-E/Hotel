@@ -8,8 +8,8 @@ import java.util.List;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static List<Booking> bookings= new ArrayList<>();
-    static DateTimeFormatter czDateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    //static List<Booking> bookings= new ArrayList<>();
+    static DateTimeFormatter czDateFormatter = DateTimeFormatter.ofPattern("d.M.yyyy");
     public static void main(String[] args) {
 
         Guest guest1 = new Guest("Adéla", "Malíková", LocalDate.of(1993,3,13));
@@ -42,10 +42,11 @@ public class Main {
     }
     private static void printBookings(){
 
+        /*
         for (Booking booking:bookings){
             System.out.println( (bookings.indexOf(booking)+1) + " " + booking);
         }
-
+*/
 
     }
 

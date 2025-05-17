@@ -20,7 +20,7 @@ public class Booking {
         this.room = room;
         this.typeOfVacation = typeOfVacation;
         this.guests.add(guest);
-        Main.bookings.add(this);
+        //Main.bookings.add(this);
     }
 
     public Booking(LocalDate startDate, Room room, TypeOfVacation typeOfVacation, Guest guest) {
@@ -53,6 +53,10 @@ public class Booking {
 
     public List<Guest> getGuests() {
         return guests;
+    }
+
+    public int getGuestsCount(){
+        return guests.size();
     }
 
     public void addGuest(Guest guest) {
