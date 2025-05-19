@@ -38,6 +38,6 @@ public class Guest {
 
     @Override
     public String toString() {
-        return  birthName + ' '  + surName  + " ("  +  dateOfBirth.format(Main.czDateFormatter) + ")";
+        return  birthName + ' '  + surName  + " (Dat.nar.:"  +  dateOfBirth.format(Main.czDateFormatter) + ")";
     }
 }

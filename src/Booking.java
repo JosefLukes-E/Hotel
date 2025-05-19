@@ -1,6 +1,5 @@
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,40 +13,40 @@ public class Booking {
     //private boolean isBusiness;
     private TypeOfVacation typeOfVacation;
 
-    public Booking(LocalDate startDate, LocalDate endDate, Room room, TypeOfVacation typeOfVacation, Guest guest) {
+    public Booking(LocalDate startDate, LocalDate endDate, Room room, TypeOfVacation typeOfVacation, List<Guest> guests) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.room = room;
         this.typeOfVacation = typeOfVacation;
-        this.guests.add(guest);
+        this.guests=guests;
         //Main.bookings.add(this);
     }
 
-    public Booking(LocalDate startDate, Room room, TypeOfVacation typeOfVacation, Guest guest) {
-        this(startDate,startDate.plusDays(6),room,typeOfVacation,guest);
+    public Booking(LocalDate startDate, Room room, TypeOfVacation typeOfVacation, List<Guest> guests) {
+        this(startDate,startDate.plusDays(6),room,typeOfVacation,guests);
         this.startDate = startDate;
 
 
 
     }
-    public Booking( Room room, TypeOfVacation typeOfVacation, Guest guest) {
-        this(LocalDate.now(),LocalDate.now().plusDays(6),room,typeOfVacation,guest);
+    public Booking( Room room, TypeOfVacation typeOfVacation, List<Guest> guests) {
+        this(LocalDate.now(),LocalDate.now().plusDays(6),room,typeOfVacation,guests);
         this.startDate = startDate;
 
 
     }
 
-    public BigDecimal totalDaysForStay(){
+    public BigDecimal getBookingLength(){
 
         long countOfDays =  DAYS.between(startDate,endDate);
 
         return BigDecimal.valueOf(countOfDays);
 
     }
-    public BigDecimal totalPriceForStay(){
+    public BigDecimal getTotalPrice(){
 
 
-        BigDecimal total = room.getPricePerNight().multiply(totalDaysForStay());
+        BigDecimal total = room.getPricePerNight().multiply(getBookingLength());
         return total;
     }
 
@@ -92,6 +91,14 @@ public class Booking {
         return typeOfVacation;
     }
 
+    public String isBussinesTrip(){
+        if (TypeOfVacation.BUSINESS.equals(getTypeOfVacation())){
+            return "ano";
+        } else {
+            return "ne";
+        }
+    }
+
     public void setTypeOfVacation(TypeOfVacation typeOfVacation) {
         this.typeOfVacation = typeOfVacation;
     }
@@ -99,13 +106,20 @@ public class Booking {
     @Override
     public String toString() {
 
-        return "Rezervace: " +
-                "hosté=" + guests +
-                ",od " + startDate.format(Main.czDateFormatter) +
-                ",do " + endDate.format(Main.czDateFormatter) +
-                ",pokoj č. " + room.getNumber() +
-                ",typ pobytu " + typeOfVacation +
-                ",počet dní " + totalDaysForStay()  +
-                ",cena za pobyt " + totalPriceForStay() + " Kč";
+//        return "Rezervace: " +
+//                "hosté=" + guests +
+//                ",od " + startDate.format(Main.czDateFormatter) +
+//                ",do " + endDate.format(Main.czDateFormatter) +
+//                ",pokoj č. " + room.getNumber() +
+//                ",typ pobytu " + typeOfVacation +
+//                ",počet dní " + getBookingLength()  +
+//                ",cena za pobyt " + getTotalPrice() + " Kč";
+        return "Rezervace pro: " +
+                guests +
+                " na pokoj č.: " + getRoom().getNumber() +
+                " termín " + startDate.format(Main.czDateFormatter) +
+                "- " + endDate.format(Main.czDateFormatter) +
+                " pracovní pobyt: " + isBussinesTrip()
+                ;
     }
 }

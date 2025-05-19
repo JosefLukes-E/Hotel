@@ -4,6 +4,10 @@ import java.util.List;
 public class BookingManager {
     private List<Booking>  bookings= new ArrayList<>();
 
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     public void addBooking(Booking booking) {
         bookings.add(booking);
     }
@@ -32,11 +36,12 @@ public class BookingManager {
 
     public double getAverageGuests(){
         double average = -1;
-        double guestCount = -1;
+        double guestCount = 0;
         for (Booking b : bookings){
+
             guestCount += b.getGuestsCount();
         }
-        if (bookings.isEmpty()){
+        if (!bookings.isEmpty()){
             average = guestCount/bookings.size();
         }
 
@@ -44,7 +49,11 @@ public class BookingManager {
     }
 
     public void getTopNHolidayBookings(int topN){
+
         int topNfound = 0;
+
+        System.out.println("Prvních " + topN + " rekreačních rezervací:");
+
         for (Booking b: bookings){
             if (TypeOfVacation.PRIVATE.equals(b.getTypeOfVacation())){
                 System.out.println(b);
@@ -80,9 +89,21 @@ public class BookingManager {
         System.out.println("celkový počet rezervací se dvěma hosty: " +countOfTwoGuest);
         System.out.println("celkový počet rezervací s s více než dvěma hosty: " +countOfMoreGuest);
     }
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
 
+    public void getFormattedSummary(){
+
+        System.out.println("Formátovaný výpis všech rezervací v systému:");
+        for (Booking booking:bookings){
+
+            System.out.println(booking.getStartDate().format(Main.czDateFormatter) + " až "
+                           + booking.getEndDate().format(Main.czDateFormatter) + ": "
+                            + booking.getGuests().get(0) + "[hostů: "
+                          + booking.getGuests().size() + ", výhled na moře: "
+                           + booking.getRoom().isSeaView() + "] za "
+                            + booking.getTotalPrice() + " Kč"
+            );
+
+        }
+    }
 
 }

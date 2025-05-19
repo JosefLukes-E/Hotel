@@ -40,8 +40,13 @@ public class Room {
         this.balcony = balcony;
     }
 
-    public boolean isSeaView() {
-        return seaView;
+    public String isSeaView() {
+        if (seaView) {
+            return "Ano";
+        } else {
+            return "Ne";
+        }
+
     }
 
     public void setSeaView(boolean seaView) {
@@ -60,10 +65,10 @@ public class Room {
     public String toString() {
         return
                 "Číslo pokoje " + number +
-                ", počet postelí" + bed +
-                ", má balkón " + balcony +
-                ", má výhled na moře " + seaView +
-                ", cena za noc " + pricePerNight
+                        ", počet postelí" + bed +
+                        ", má balkón " + balcony +
+                        ", má výhled na moře " + seaView +
+                        ", cena za noc " + pricePerNight
                 ;
     }
 }
